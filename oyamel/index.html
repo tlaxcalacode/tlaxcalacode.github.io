@@ -1,22 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="./index.css">
    <title>Restaurante Oyamel</title>
 </head>
+
 <body>
    <div class="container">
       <div class="orden" id="orden">
          <span class="icon" id="closeOrden">
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M400 145.49L366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49z"></path></svg>
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em"
+               width="1em" xmlns="http://www.w3.org/2000/svg">
+               <path
+                  d="M400 145.49L366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49z">
+               </path>
+            </svg>
          </span>
          <section>
             <nav></nav>
             <p>Total: $<b>10</b></p>
-            <button type="button" id="ordenar">Ordenar</button>
+            <button type="button" id="ordenar" class="button">Ordenar a Domicilio</button>
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+         </section>
+      </div>
+      <div class="domicilio" id="domicilio">
+         <span class="icon" id="closeDomicilio">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em"
+               width="1em" xmlns="http://www.w3.org/2000/svg">
+               <path
+                  d="M400 145.49L366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49z">
+               </path>
+            </svg>
+         </span>
+         <section class="form">
+            <form action="" id="formDomicilio">
+               <section class="input">
+                  <label for="nombre">Nombre de quien recibira:</label>
+                  <input type="text" required placeholder="Roberto Martinez" id="nombre" value="Michel">
+               </section>
+               <section class="input">
+                  <label for="calle">Calle:</label>
+                  <input type="text" required placeholder="Benito Juarez" id="calle" value="galeana">
+               </section>
+               <section class="input">
+                  <label for="calle">Número:</label>
+                  <input type="number" required placeholder="1003" id="numero" value="1003">
+               </section>
+               <section class="input">
+                  <label for="colonia">Colonia:</label>
+                  <select name="" id="colonia">
+                     <option value="Francisco Villa">Francisco Villa</option>
+                     <option value="Arenas">Arenas</option>
+                     <option value="Obregon">Obregon</option>
+                     <option value="Chapultepec">Chapultepec</option>
+                     <option value="Unidad Hab Infonavit Mineros">Unidad Hab Infonavit Mineros</option>
+                     <option value="Alejandro Carrasco">Alejandro Carrasco</option>
+                     <option value="San Cayetano">San Cayetano</option>
+                     <option value="Los Paredones">Los Paredones</option>
+                     <option value="Los Paredones">Loma Bonita</option>
+                  </select>
+               </section>
+               <section class="input">
+                  <label for="calle">Referencias:</label>
+                  <input type="number" required placeholder="Zaguan verde con fachada de ladrillo, jardinera color vino" id="numero" value="1003">
+               </section>
+               <input type="submit" value="Aceptar" class="button">
+            </form>
+            <nav id="tipoPago">
+               <input type="button" data-value="deposito" class="buttonT" value="Pago con Deposito">
+               <input type="button" data-value="efectivo" class="buttonT" value="Pago en Efectivo">
+            </nav>
+            <main>
+               <div data-type="deposito">
+                  <h3>Por Favor Siga Estos Pasos</h3>
+                  <ol>
+                     <li>En concepto agregar el nombre de quien recibira el pedido</li>
+                     <li>Mandar captura de pantalla del pedido al numero que se le proporcionara al dar click en el boton de "Confirmar Pedido"</li>
+                     <li>Porfavor depositar al numero de cuenta: <b> ---- </b></li>
+                  </ol>
+                  <p> y mandar captura de pantalla del deposito para que se complete su pedido</p>
+               </div>
+               <div data-type="efectivo">
+                  <section class="input">
+                     <label for="">Cantidad con la que pagara:</label>
+                     <input type="number" name="" id="" placeholder="125">
+                  </section>
+               </div>
+               <input type="button" id="confirmar" data-value="deposito" class="button" value="Confirmar Pedido">
+            </main>
          </section>
       </div>
       <div class="cart">
@@ -38,7 +112,12 @@
       </div>
       <div class="pedirBurguer" id="pedirBurguer">
          <span class="icon" id="pedirBurguerClose">
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M400 145.49L366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49z"></path></svg>
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em"
+               width="1em" xmlns="http://www.w3.org/2000/svg">
+               <path
+                  d="M400 145.49L366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49z">
+               </path>
+            </svg>
          </span>
          <form>
             <img src="./assets/iconburger.png" alt="">
