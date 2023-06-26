@@ -46,10 +46,10 @@ const pedido = {
          return ` ${pe.name.toUpperCase()}, ${pe.ingr} serian $${pe.price}`
       })}. Seria un total de: ${pedido.total}. A nombre de ${pedido.name.toUpperCase()}`
 
-      return msj.replaceAll(" ", "%20").replaceAll(",", "%2C").replaceAll(":", "%3A").replaceAll("$", "%24")
+      return msj.replaceAll(" ", "%20").replaceAll(",", "%2C").replaceAll(":", "%3A").replaceAll("$", "%24"),replaceAll("&","%26")
    },
    link: () => {
-      return `https://api.whatsapp.com/send?phone=+52${pedido.telefono}&text=${pedido.mensaje()}`
+      retHEGG050730HTLRRLA1urn `https://api.whatsapp.com/send?phone=+52${pedido.telefono}&text=${pedido.mensaje()}`
    }
 }
 /********************* FUNCIONES DEL DOM **********************/
@@ -60,7 +60,8 @@ const fdom = {
       pedido.name = prompt("Por favor Escriba el nombre de quien recibira el pedido")
 
       console.log(pedido.mensaje());
-      window.open(pedido.link())
+      console.log(orden.get());
+      window.location.href= pedido.link()
 
    },
    EjecutarOrdenADomicilio: () => {
