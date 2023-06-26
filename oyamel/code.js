@@ -2,26 +2,7 @@ const prices = {
    extra: 15,
 }
 const orden = {
-   array: [
-      {
-         "ide": 4,
-         "ingr": "",
-         "name": "Hamburguesa Clásica",
-         "price": "45"
-      },
-      {
-         "ide": 5,
-         "ingr": "sin jitomate,sin cebolla,sin chiles,extra chischorra,extra queso,",
-         "name": "Hamburguesa Hawaiana",
-         "price": "90"
-      },
-      {
-         "ide": 6,
-         "ingr": "sin jitomate,sin cebolla,extra chischorra,",
-         "name": "Hamburguesa Clásica",
-         "price": "60"
-      }
-   ],
+   array: [],
    remover: (val) => orden.array = orden.array.filter(arr => arr.ide != val),
    tam: () => orden.array.length,
    get: () => orden.array,
@@ -63,7 +44,7 @@ const pedido = {
    mensaje: () => {
       let msj = `Hola me gustaria ordenar: ${orden.array.map(pe => {
          return ` ${pe.name.toUpperCase()}, ${pe.ingr} serian $${pe.price}`
-      })}. A nombre de ${pedido.name.toUpperCase()}`
+      })}. Seria un total de: ${pedido.total}. A nombre de ${pedido.name.toUpperCase()}`
 
       return msj.replaceAll(" ", "%20").replaceAll(",", "%2C").replaceAll(":", "%3A").replaceAll("$", "%24")
    },
@@ -182,7 +163,7 @@ const fdom = {
          }
       })
    },
-   pedirAlitas: (bol)=>{
+   pedirAlitas: (bol) => {
       const pedirBurguer = document.getElementById("pedirBurguer")
       pedirBurguer.style.top = bol ? '0' : '-100vh'
       pedirBurguer.innerHTML = `
@@ -209,14 +190,18 @@ const fdom = {
       section.querySelector("h2").textContent = name
       section.querySelector("h4 b").textContent = price
 
-      section.querySelectorAll("nav")[1].addEventListener("input", (e) => {
-         const b = section.querySelector("h4 b");
-         if (e.target.checked) {
-            b.textContent = parseInt(b.textContent) + prices.extra
-         } else {
-            b.textContent = parseInt(b.textContent) - prices.extra
-         }
-      })
+      try {
+         section.querySelectorAll("nav")[1].addEventListener("input", (e) => {
+            const b = section.querySelector("h4 b");
+            if (e.target.checked) {
+               b.textContent = parseInt(b.textContent) + prices.extra
+            } else {
+               b.textContent = parseInt(b.textContent) - prices.extra
+            }
+         })
+      } catch (error) {
+         console.log("No hay elementos extras");
+      }
    },
    carrito: (bol) => {
       document.getElementById("orden").style.top = bol ? '0' : '-100vh'
@@ -253,6 +238,7 @@ const fdom = {
             return
          }
          // fdom.EjecutarOrdenADomicilio();
+         pedido.total=total;
          fdom.EjecutarOrdenARestaurante();
       })
    },
@@ -274,6 +260,20 @@ const fdom = {
          }
       })
    },
+   agregarExtra: (e) => {
+      let ide;
+      try {
+         ide = (orden.get()[orden.tam() - 1].ide) + 1
+      } catch (error) {
+         ide = 1
+      }
+      orden.set({
+         ide: ide,
+         ingr: "",
+         name: e.dataset.name,
+         price: e.dataset.price,
+      })
+   },
    ordenar: e => {
       console.log(e.target.dataset.type);
       if (e.target.dataset.type == "burguer") {
@@ -289,6 +289,14 @@ const fdom = {
             price: e.target.dataset.price,
             name: e.target.dataset.name,
          })
+      }
+      if (e.target.dataset.type == "extras"
+         || e.target.dataset.type == "bebida") {
+         fdom.agregarExtra(e.target)
+         document.getElementById("bebidas").style.left = '0'
+         setTimeout(() => {
+            document.getElementById("bebidas").style.left = '-50vh'
+         }, 2000);
       }
    }
 }
