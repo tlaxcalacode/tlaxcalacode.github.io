@@ -1,7 +1,8 @@
 const data = [
    {
       "name": "HAMBURGUESAS",
-      "icon": "./assets/iconburger.png",
+      "icon": "./assets/menu/burguer.png",
+      "type": "burguer",
       "platillos": [
          {
             "name": "Hamburguesa Hawaiana",
@@ -19,7 +20,8 @@ const data = [
       ]
    }, {
       "name": "HAMBURGUESAS ESPECIALES",
-      "icon": "./assets/iconburger.png",
+      "icon": "./assets/menu/burguer.png",
+      "type": "burguer",
       "platillos": [
          {
             "name": "Hamburguesa OYAMEL ",
@@ -37,7 +39,8 @@ const data = [
       ]
    }, {
       "name": "ALITAS",
-      "icon": "./assets/iconburger.png",
+      "icon": "./assets/menu/alitas.png",
+      "type": "alitas",
       "platillos": [
          {
             "name": "Alitas BBQ",
@@ -53,17 +56,96 @@ const data = [
             "price": "60"
          },
       ]
+   }, {
+      "name": "Extras",
+      "icon": "./assets/menu/papas.png",
+      "type": "extras",
+      "platillos": [
+         {
+            "name": "Hot-Dog Simple",
+            "price": "19"
+         }, {
+            "name": "Papas A la Francesas ",
+            "price": "42"
+         }
+      ]
+   }, {
+      "name": "Bebidas Calientes ",
+      "icon": "./assets/menu/cafe.png",
+      "type": "bebida",
+      "platillos": [
+         {"name": "Expresso <b>Chico</b>","price": "20"}, 
+         {"name": "American Latee <b>Grande</b>","price": "30"}, 
+         {"name": "American Latee <b>Chico</b>","price": "20"}, 
+         {"name": "Latee <b>Chico</b>","price": "30"}, 
+         {"name": "Latee <b>Grande</b>","price": "47"}, 
+         {"name": "Vienés <b>Chico</b>","price": "35"},
+         {"name": "Bombón <b>Chico</b>","price": "40"},
+         {"name": "Affogato <b>Chico</b>","price": "30"},
+         {"name": "Moka <b>Grande</b>","price": "47"}, 
+         {"name": "Moka <b>Chico</b>","price": "35"}, 
+         {"name": "Hawaiano <b>Grande</b>","price": "45"}, 
+         {"name": "Hawaiano <b>Chico</b>","price": "32"}, 
+         {"name": "Chocolate Caliente <b>Grande</b>","price": "42"}, 
+         {"name": "Chocolate Caliente <b>Chico</b>","price": "23"}, 
+      ]
+   }, {
+      "name": "Capucchinos",
+      "icon": "./assets/menu/caliente.png",
+      "type": "bebida",
+      "platillos": [
+         {"name": "Capuchino Baileys <b>Grande</b>","price": "30"}, 
+         {"name": "Capuchino Baileys <b>Chico</b>","price": "20"}, 
+         {"name": "Capucchino Rompope <b>Chico</b>","price": "30"}, 
+         {"name": "Capucchino Rompope <b>Grande</b>","price": "47"}, 
+      ]
+   }, {
+      "name": "Malteadas",
+      "icon": "./assets/menu/malteada.png",
+      "type": "bebida",
+      "platillos": [
+         {"name": "Fresa","price": "35"}, 
+         {"name": "Vainilla","price": "35"}, 
+         {"name": "Chocolate","price": "35"}, 
+      ]
+   }, {
+      "name": "Frapee",
+      "icon": "./assets/menu/caliente.png",
+      "type": "bebida",
+      "platillos": [
+         {"name": "Moka","price": "45"}, 
+         {"name": "Chocolate Blanco","price": "45"}, 
+         {"name": "Cookies & Cream","price": "45"}, 
+         {"name": "Chocolate","price": "45"}, 
+      ]
+   }, {
+      "name": "Smoothie",
+      "icon": "./assets/menu/caliente.png",
+      "type": "bebida",
+      "platillos": [
+         {"name": "Frutos Rojos","price": "48"}, 
+         {"name": "Mango","price": "45"}, 
+         {"name": "Kiwi & Fresa","price": "48"}, 
+      ]
+   }, {
+      "name": "Wafless",
+      "icon": "./assets/menu/waffle.png",
+      "type": "bebida",
+      "platillos": [
+         {"name": "Con Helado","price": "45"}, 
+         {"name": "Frutos Rojos & Frutas Mixtas","price": "55"}, 
+      ]
    }
 ]
 const componentes = {
-   platillos: (pla) => {
+   platillos: (pla,type) => {
       let cad = "";
       pla.map(p =>{
          cad += `
-         <div class="data-platillo" data-name="${p.name}" data-price="${p.price}">
+         <div class="data-platillo" data-type="${type}" data-name="${p.name}" data-price="${p.price}">
              <div class="platillo-info">
-                 <h3>${p.name}</h3>
-                 <p>${p.ing}</p>
+                 <h3>${type} ${p.name}</h3>
+                 ${p.ing ? `<p>${p.ing}</p>` : ""}
              </div>
              <div class="platillo-price">
                  <b>$ ${p.price}</b>
@@ -84,12 +166,13 @@ const componentes = {
                 </span>
             </div>
             <nav>
-               ${componentes.platillos(d.platillos)}
+               ${componentes.platillos(d.platillos,d.type)}
             </nav>
         </section>
         `
    },
 }
-data.map(d => 
+data.map(d => {
+   console.log(d.type)
    document.querySelector(".data").innerHTML += componentes.categoria(d)
-)
+})
